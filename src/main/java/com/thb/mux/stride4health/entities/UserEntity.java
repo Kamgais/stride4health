@@ -1,15 +1,16 @@
 package com.thb.mux.stride4health.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,23 +18,35 @@ import java.util.UUID;
 
 public class UserEntity {
 
-
+    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(name = "username")
     private String username;
 
 
+    @Setter
     @Column(name = "password")
     private String password;
 
 
+    //@JsonIgnore // added
+    @Setter
     @OneToMany(mappedBy = "user")
     private List<TrainingsDay> trainingsDays;
 
+    //@JsonBackReference
+    @Setter
     @ManyToOne
     @JoinColumn(name="court_id")
     private Court court;
+
+
+    // Function to get the total Steps
+    public Long getTotalSteps() {
+        return trainingsDays.stream().mapToLong(TrainingsDay::getSteps).sum();
+    }
 }

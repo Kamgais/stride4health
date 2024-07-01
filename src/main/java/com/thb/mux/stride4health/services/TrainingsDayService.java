@@ -5,7 +5,6 @@ import com.thb.mux.stride4health.repositories.ITrainingsDay;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class TrainingsDayService {

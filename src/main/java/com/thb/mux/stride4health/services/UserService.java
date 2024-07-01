@@ -1,14 +1,13 @@
 package com.thb.mux.stride4health.services;
+
 import com.thb.mux.stride4health.entities.UserEntity;
 import com.thb.mux.stride4health.repositories.IUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-public class UserService {
-
+public class UserService  {
 
     private final IUserRepository userRepository;
 
@@ -31,4 +30,5 @@ public class UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
+
 }
