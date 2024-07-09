@@ -1,6 +1,7 @@
 package com.thb.mux.stride4health.controllers;
 
 import com.thb.mux.stride4health.entities.TrainingsDay;
+import com.thb.mux.stride4health.entities.UserEntity;
 import com.thb.mux.stride4health.services.TrainingsDayService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +47,6 @@ public class TrainingsDayController {
         trainingsDayService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
 

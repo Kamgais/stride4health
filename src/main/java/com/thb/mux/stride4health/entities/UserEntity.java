@@ -18,7 +18,6 @@ import java.util.UUID;
 
 public class UserEntity {
 
-    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,23 +26,20 @@ public class UserEntity {
     @Column(name = "username")
     private String username;
 
-
     @Setter
     @Column(name = "password")
     private String password;
 
 
-    //@JsonIgnore // added
     @Setter
     @OneToMany(mappedBy = "user")
     private List<TrainingsDay> trainingsDays;
 
-    //@JsonBackReference
+
     @Setter
     @ManyToOne
     @JoinColumn(name="court_id")
     private Court court;
-
 
     // Function to get the total Steps
     public Long getTotalSteps() {
