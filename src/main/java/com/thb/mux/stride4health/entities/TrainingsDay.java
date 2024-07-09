@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Getter
 @Entity
+@Table(name = "trainings_day")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -24,6 +25,11 @@ public class TrainingsDay {
     @Setter
     @Column(name="day")
     private Date date;
+
+    @Setter
+    @Column(name = "day_target")
+    private Long day_target;
+
 
     @Setter
     @ManyToOne

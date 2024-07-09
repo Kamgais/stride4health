@@ -1,5 +1,7 @@
 package com.thb.mux.stride4health.controllers;
+import com.thb.mux.stride4health.entities.TrainingsDay;
 import com.thb.mux.stride4health.entities.UserEntity;
+import com.thb.mux.stride4health.services.TrainingsDayService;
 import com.thb.mux.stride4health.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +14,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final TrainingsDayService trainingsDayService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, TrainingsDayService trainingsDayService) {
         this.userService = userService;
+        this.trainingsDayService = trainingsDayService;
     }
 
     @GetMapping
@@ -43,6 +47,16 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/{userId}/target")
+    public ResponseEntity<TrainingsDay> updateDayTargetForUser(@PathVariable Long userId, @RequestParam Long dayTarget) {
+        TrainingsDay updatedDayTarget = trainingsDayService.updateDayTargetForUser(userId, dayTarget);
+        if (updatedDayTarget != null) {
+            return new ResponseEntity<>(updatedDayTarget, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }
