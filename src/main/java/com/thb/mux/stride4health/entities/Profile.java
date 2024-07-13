@@ -3,31 +3,39 @@ package com.thb.mux.stride4health.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 
-public class UserEntity {
+public class Profile {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "firstname")
+    private String firstname;
 
+    @Column(name = "lastname")
+    private String lastname;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
+
+    @Column(name="daily_goal")
+    private Long dailyGoal = 10000L;
 
 
     @OneToMany(mappedBy = "user")
@@ -36,4 +44,9 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name="court_id")
     private Court court;
+
+    // Function to get the total Steps
+    public Long getTotalSteps() {
+        return trainingsDays.stream().mapToLong(TrainingsDay::getSteps).sum();
+    }
 }
