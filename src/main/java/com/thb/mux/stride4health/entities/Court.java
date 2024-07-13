@@ -23,6 +23,6 @@ public class Court {
     private String place;
 
     @OneToMany(mappedBy = "court")
-    private List<UserEntity> users;
+    private List<Profile> users;
 
 }
